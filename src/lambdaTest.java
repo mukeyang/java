@@ -16,7 +16,8 @@ import java.util.stream.Stream;
  */
 public class lambdaTest {
     @FunctionalInterface
-    interface Predicate<T> {
+    interface Predicate<T
+            > {
         boolean test(T t);
 
         static String name() {
