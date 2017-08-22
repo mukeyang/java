@@ -102,3 +102,17 @@ enum Grade{
     public  abstract String localvalue();
 
 }
+class d1{
+     void s(){}
+
+}
+
+class d2 extends d1 {
+
+
+    @Override
+    public  void s() {
+        super.s();
+    }
+}
+
