@@ -1,8 +1,12 @@
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
 
 /**
  * Created by CS on 2017/8/18.
@@ -114,5 +118,38 @@ class d2 extends d1 {
     public  void s() {
         super.s();
     }
+}
+
+class chanelCopy {
+    public static void main(String[] args) throws IOException {
+        ReadableByteChannel channel1 = Channels.newChannel(System.in);
+        WritableByteChannel channel2 = Channels.newChannel(System.out);
+        channelCopy1(channel1, channel2);
+    }
+
+    private static void channelCopy1(ReadableByteChannel channel1, WritableByteChannel channel2) throws IOException {
+        ByteBuffer buffer = ByteBuffer.allocateDirect(16 * 1024);
+        while (channel1.read(buffer)!=-1){
+            buffer.flip();
+            channel2.write(buffer);
+            buffer.compact();
+        }
+        buffer.flip();
+        while (buffer.hasRemaining()){
+            channel2.write(buffer);
+        }
+    }
+    private static void channelCopy2(ReadableByteChannel channel1, WritableByteChannel channel2) throws IOException {
+        ByteBuffer buffer = ByteBuffer.allocateDirect(16 * 1024);
+        while (channel1.read(buffer)!=-1){
+            buffer.flip();
+            while (buffer.hasRemaining()){
+                channel2.write(buffer);
+            }
+        }
+        buffer.clear();
+
+    }
+
 }
 
