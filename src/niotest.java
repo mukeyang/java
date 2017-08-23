@@ -1,10 +1,13 @@
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 
@@ -86,6 +89,17 @@ public class niotest {
         }
 
     }
+
+    public static void catFile(String file) throws Exception {
+        WritableByteChannel target = Channels.newChannel(System.out);
+        FileInputStream stream = new FileInputStream("1.txt");
+        FileChannel channel = stream.getChannel();
+        channel.transferTo(0,channel.size(),target);
+        channel.close();
+        stream.close();
+
+
+    }
 }
 enum Grade{
     A("100-90"){
@@ -124,7 +138,8 @@ class chanelCopy {
     public static void main(String[] args) throws IOException {
         ReadableByteChannel channel1 = Channels.newChannel(System.in);
         WritableByteChannel channel2 = Channels.newChannel(System.out);
-        channelCopy1(channel1, channel2);
+        //channelCopy1(channel1, channel2);
+        testPosition();
     }
 
     private static void channelCopy1(ReadableByteChannel channel1, WritableByteChannel channel2) throws IOException {
@@ -148,7 +163,16 @@ class chanelCopy {
             }
         }
         buffer.clear();
+    }
 
+    public static void testPosition() {
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile("1.txt","r")) {
+            randomAccessFile.seek(3);
+            FileChannel channel = randomAccessFile.getChannel();
+            System.out.println(channel.position());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
