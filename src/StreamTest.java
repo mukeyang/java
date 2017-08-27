@@ -18,7 +18,6 @@ public class StreamTest {
             put(1,2);
             put(4,3);
             put(2,4);
-
             put(5,8);
             put(3,8);
         }
@@ -59,6 +58,7 @@ public class StreamTest {
         Map<Integer, Long> collect1 = map.keySet().stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         collect1.forEach((a,b)-> System.out.println(a+"gg"+b));
         Map<Integer, Set<Integer>> collect2 = map.keySet().stream().collect(Collectors.groupingBy(Function.identity(), Collectors.mapping(Function.identity(), Collectors.toSet())));
+        "chensiayng".chars().mapToObj(Integer::new).sorted((Comparator.<Integer,Integer>comparing(Function.identity()).reversed())).reduce(0,(a,b)->a+b);
     }
 
     @Test
