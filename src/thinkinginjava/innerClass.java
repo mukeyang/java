@@ -122,6 +122,9 @@ class Wrap {
 
 class Callee {
       class  dd2 implements dd{
+          dd2() {
+
+          }
         public void dg() {
 
         }

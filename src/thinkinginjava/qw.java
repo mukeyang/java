@@ -3,6 +3,7 @@ package thinkinginjava;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -11,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by CS on 2017/8/25.
@@ -26,13 +28,51 @@ class Image{
 }
 
 public class qw {
+    @Test
+    public void testRead() {
+        char[] a=new char[4096];
+        String path = "D:/dataset/features.txt";
+        try {
+          Files.newBufferedReader(Paths.get(path)).read(a);
+            System.out.println(a);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testItr() {
+
+    }
     public static void main(String[] args) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Type type = new TypeToken<Collection<Image>>() {
-        }.getType();
-        List<Image>sw = gson.fromJson(Files.newBufferedReader(Paths.get("C:\\Users\\CS\\PycharmProjects\\dataset\\1.txt")).readLine(), type);
 
+        }.getType();
+        System.out.println(Files.newBufferedReader(Paths.get("D:/dataset/features.txt")).lines().limit(2).collect(Collectors.joining("")));
+         List<Image> sw = gson.fromJson(Files.newBufferedReader(Paths.get("D:/dataset/features.txt")).lines().limit(10000).collect(Collectors.joining(""))+"]", type);
         System.out.println(sw.size());
+        for (int i = 0; i < 30; i++) {
+            System.out.println(sw.get(i));
+        }
+//        ArrayList<Integer> a = new ArrayList<>();
+//        a.add(1);
+//        a.add(2);
+//        a.add(3);
+//        ListIterator<Integer> iterator = a.listIterator();
+////        while (iterator.hasNext()) {
+//            System.out.println(iterator.next());
+//            System.out.println(iterator.next());
+//        System.out.println(iterator.previous());
+//        iterator.add(4);
+//        System.out.println(iterator.previous());
+//
+//        System.out.println(iterator.next());
+//        System.out.println(iterator.next());
+//
+//        System.out.println(iterator.next());
+//        a.forEach(System.out::println);
+//        }
 
     }
 

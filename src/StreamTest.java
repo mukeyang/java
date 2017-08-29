@@ -52,6 +52,7 @@ public class StreamTest {
 
     @Test
     public void streamTest() {
+
         BinaryOperator<Integer> integerBinaryOperator = BinaryOperator.<Integer>minBy(Comparator.naturalOrder());
         Map<Integer, Long> collect = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 8).stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println(map.keySet().stream().reduce(0, (sum, item) -> sum + item));
