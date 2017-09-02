@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -26,8 +24,29 @@ class Image{
         return id+"\n feature:"+feature.toString();
     }
 }
+class SImage{
+
+}
 
 public class qw {
+    @Test
+    public void testLog() throws IOException {
+//        Logger test = Logger.getLogger("test");
+//        ConsoleHandler console = new ConsoleHandler();
+//        console.setLevel(Level.ALL);
+//        MemoryHandler mhandle = new MemoryHandler(console,10, Level.ALL);
+////        test.addHandler(mhandle);
+//        if(Files.notExists(Paths.get("2.txt")))
+//        Files.createFile(Paths.get("2.txt"));
+//        FileHandler file= new FileHandler("2.txt", true);
+//        file.setLevel(Level.ALL);
+//        file.setFormatter(new SimpleFormatter());
+//        test.addHandler(file);
+//        test.setLevel(Level.ALL);
+//
+//        test.info("123");
+        System.out.println(Double.parseDouble("3.123124354657668698"));
+    }
     @Test
     public void testRead() {
         char[] a=new char[4096];
@@ -42,7 +61,12 @@ public class qw {
 
     @Test
     public void testItr() {
-
+        Gson gson = new Gson();
+        Map<Integer, Integer> a = new HashMap<>();
+        a.put(1, 2);
+        a.put(4, 2);
+        a.put(2, 2);
+        System.out.println(gson.toJson(a));
     }
     public static void main(String[] args) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -55,6 +79,10 @@ public class qw {
         for (int i = 0; i < 30; i++) {
             System.out.println(sw.get(i));
         }
+
+
+
+
 //        ArrayList<Integer> a = new ArrayList<>();
 //        a.add(1);
 //        a.add(2);
