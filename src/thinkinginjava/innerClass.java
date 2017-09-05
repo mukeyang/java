@@ -111,7 +111,7 @@ interface dd{
 
 class Wrap {
     Wrap(int x){
-
+//        getClass()
     }
     Wrap() {
 
@@ -141,6 +141,11 @@ class Callee {
 
 }
 
+class tf extends Callee {
+    public void gt() {
+
+    }
+}
 class InheritInner extends Callee.dd2 {
     InheritInner(Callee x) {
         x.super();
