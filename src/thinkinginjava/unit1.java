@@ -1,11 +1,55 @@
 package thinkinginjava;
 
+import org.junit.Test;
+
 import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 /**
  * Created by CS on 2017/8/19.
  */
 public class unit1 {
+    @Test
+    public void ss() {
+        try {
+            Files.walkFileTree(Paths.get("c:/"), new FileVisitor<Path>() {
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                    System.out.println(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    return FileVisitResult.CONTINUE;
+
+                }
+
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                    return FileVisitResult.CONTINUE;
+
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    return FileVisitResult.CONTINUE;
+
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (DirectoryStream<Path> paths = Files.newDirectoryStream(Paths.get("c:/"))) {
+            for (Path path : paths) {
+                System.out.println(path);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) throws IOException {
 //        if(!Files.exists(Paths.get("1.txt")))
 //        Files.createFile(Paths.get("1.txt"));
@@ -37,6 +81,7 @@ public class unit1 {
 }
 
 class ew   {
+
     int i=1;
     void setI(){
         System.out.println("ew"+i);
