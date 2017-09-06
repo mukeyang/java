@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,9 +27,19 @@ class Image{
 }
 class SImage{
 
+
 }
 
 public class qw {
+    private  int i = 1;
+
+    @Test
+    public void ss() throws NoSuchFieldException, IllegalAccessException {
+        Field i1 = getClass().getDeclaredField("i");
+        i1.setAccessible(true);
+        i1.setInt(this,2);
+        System.out.println(i);
+    }
     @Test
     public void testLog() throws IOException {
 //        Logger test = Logger.getLogger("test");

@@ -27,16 +27,16 @@ public class proxy implements InvocationHandler {
     public proxy(Object target) {
         this.target = target;
     }
-    public  proxy() {
+//    public  proxy() {
 
-    }
+//    }
 
     @Override
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println(proxy.getClass());
 //        getClass().getConstructor()
-        System.out.println("before");
-        Object o = method.invoke(target, args);
+        System.out.println("before");      Object o = method.invoke(target, args);
         System.out.println("After");
         return o;
     }
