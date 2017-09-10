@@ -19,16 +19,30 @@ public class ArrayMaker<T> {
 //        this.kind = kind;
 //    }
 public ArrayMaker(){}
-    void create(int size) {
+    @SuppressWarnings("unchecked")
+    T[] create(int size) {
         Type type = ((ParameterizedType) new base<ArrayMaker<Integer>>() {
         }.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         System.out.println(type);
+        T[] ts = (T[]) Array.newInstance(kind, size);
+        return ts;
+    }
 
+    void create() {
+        Object o = Array.newInstance(kind, 10);
+        System.out.println("create"+o.getClass());
     }
 
     public static void main(String[] args) {
 //        System.out.println(new ArrayMaker<Integer>().create(10)[0]);
-       new ArrayMaker<Integer>().create(10);
+        ArrayMaker<String> maker = new ArrayMaker<>();
+        maker.kind=String.class;
+        String[] timo = maker.create(10);
+        maker.create();
+        System.out.println(timo.getClass());
+        System.out.println(maker.getClass().getSimpleName());
+        timo[0]="123";
+        System.out.println(timo[0]);
         System.out.println("123" instanceof Object);
         System.out.println("123".getClass().isAssignableFrom(new Object().getClass()));
     }
@@ -66,12 +80,29 @@ public ArrayMaker(){}
         a.put(0, 1);
         a.put(1,2);
         for (Object o : a.toArray()) {
-            System.out.println(((Integer) o));
+            System.out.println((o.getClass()));
 //            System.out.println(o);
         }
         for (Integer integer : a.toArray(ints)) {
             System.out.println(integer);
         }
+    }
+
+    @Test
+    public void sf() {
+//        Object[]a =new String[10];
+//        a[0]="123";
+//        a[1]=2;
+//        Object[] objects = Arrays.asList("12", "45").toArray();
+//        for (Object object : objects) {
+//            System.out.println(object);
+//        }
+        ArrayList<?super de2>d=new ArrayList<de>();
+        ArrayList<? extends de>d2=new ArrayList<de2>();
+        d.add(new de2());
+        d2.contains(new de());
+        ArrayList<? extends Object> d3=new ArrayList<de>();
+        Object o = d3.get(1);
     }
 }
 
@@ -91,6 +122,7 @@ class de2 extends de {
         System.out.println("de2");
 
     }
+
 }
 
 class genericArray<T> {
@@ -113,6 +145,9 @@ class genericArray<T> {
         return copyOf(array, array.length,array.getClass());
     }
 
+//    public T[] array() {
+//
+//    }
     public T[] toArray(T[]a) {
         if (a.length < array.length)
             // Make a new array of a's runtime type, but my contents:
