@@ -2,12 +2,15 @@ package thinkinginjava;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by CS on 2017/9/7.
@@ -61,7 +64,7 @@ public ArrayMaker(){}
     @Test
     public void sd() {
         Class<de2> aClass = de2.class;
-        System.out.println(de.i);
+//        System.out.println(de);
         System.out.println("123");
         try {
             de de = aClass.newInstance();
@@ -97,17 +100,103 @@ public ArrayMaker(){}
 //        for (Object object : objects) {
 //            System.out.println(object);
 //        }
-        ArrayList<?super de2>d=new ArrayList<de>();
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(2);
+        ArrayList l2=list;
+        ArrayList<? extends Object> d8=l2;
+//        d8.add(3);
+//        gebn(d8);
+        ArrayList<String> l21 =  l2;
+        System.out.println("test"+l21.get(0));
+        ArrayList<de> des = new ArrayList<>();
+        ArrayList<?super de2>d= des;
         ArrayList<? extends de>d2=new ArrayList<de2>();
         d.add(new de2());
+        Object object = d.get(0);
+        System.out.println(des.get(0).getClass());
+        System.out.println("des.size="+des.size());
+        System.out.println("d.size="+d.size());
         d2.contains(new de());
         ArrayList<? extends Object> d3=new ArrayList<de>();
-        Object o = d3.get(1);
+//        Object o = d3.get(1);
+    }
+
+    @Test
+    public void hg() {
+        System.out.println(new ArrayList<Integer>().getClass());
+        ArrayList strings = new ArrayList<>();
+
+        ArrayList<Integer>a=  strings;
+        int i =6;
+        holder a2=new holder();
+        System.out.println(genric(a2, 6));
+        try {
+            ObjectInputStream stream = new ObjectInputStream(System.in);
+            Object o = stream.readObject();
+
+            List<Integer> cast = List.class.cast(o);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+void raw(holder holder,Object arg) {
+    holder<Integer> d=holder;
+    holder.setT1(arg);
+
+}
+
+    @Test
+    public void testList() {
+        ArrayList<Integer> a = new ArrayList<>();
+        a.add(1);
+        a.add(2);
+        a.add(3);
+        a.add(4);
+        ListIterator<Integer> integerListIterator = a.listIterator();
+        integerListIterator.next();
+        integerListIterator.next();
+        integerListIterator.next();
+        System.out.println(integerListIterator.previous());
+        integerListIterator.remove();
+//        integerListIterator.remove();
+        a.forEach(System.out::println);
+    }
+    void gebn(holder<T> a) {
+
+    }
+<T>T genric(holder<T> a,T b) {
+    a.setT1(b);
+return a.getT1();
+}
+
+    void unbound(holder<?> holder,Object arg) {
+//        holder.setT1(arg);
+        Object t1 = holder.getT1();
+    }
+    @Test
+    public void ff() {
+        holder holder = new holder();
+        raw(holder,new Object());
+        Object t1 = holder.getT1();
+    }
+}
+class holder<T>{
+        public T t1;
+
+    public T getT1() {
+        return t1;
+    }
+
+    public void setT1(T t1) {
+        this.t1 = t1;
     }
 }
 
 class de {
-    public static final int i=1;
+    public   int i=1;
     static {
         System.out.println("de");
     }
@@ -118,6 +207,7 @@ class de {
 }
 
 class de2 extends de {
+    public int i=2;
     public void s() {
         System.out.println("de2");
 
