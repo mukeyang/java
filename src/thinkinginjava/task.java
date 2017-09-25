@@ -149,4 +149,19 @@ class lru<K,V> {
         return entry.value;
     }
 
+    public void put(K key,V value) {
+        Entry<K, V> entry = getEntry(key);
+        if (entry == null) {
+            if(map.size()>max){
+                map.remove(last.key);
+                removeLast();
+            }
+            entry=new Entry<>();
+            entry.key=key;
+        }
+        entry.value=value;
+        moveToFirst(entry);
+        map.put(key, entry);
+    }
+
 }
