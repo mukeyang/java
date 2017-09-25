@@ -35,7 +35,14 @@ public ArrayMaker(){}
         Object o = Array.newInstance(kind, 10);
         System.out.println("create"+o.getClass());
     }
-
+@Test
+    public void dd() {
+    System.out.println(Arrays.toString(new base<ArrayMaker<Integer>>() {
+    }.getClass().getTypeParameters()));
+    gg gg = new gg(1);
+//    de gg1 = (de) new Object();
+//    System.out.println(type);
+    }
     public static void main(String[] args) {
 //        System.out.println(new ArrayMaker<Integer>().create(10)[0]);
         ArrayMaker<String> maker = new ArrayMaker<>();
@@ -91,6 +98,12 @@ public ArrayMaker(){}
         }
     }
 
+    @Test
+    public void ggq
+            () {
+        gg[] ggs = (gg[]) new Object[3];
+//        ggs[0]= (gg) new Object();
+    }
     @Test
     public void sf() {
 //        Object[]a =new String[10];
@@ -217,9 +230,12 @@ class de2 extends de {
 
 class genericArray<T> {
     private Object[] array;
-
+    private  T[] at;
    public genericArray(int size) {
         array = new Object[size];
+//       at=(T[])new Object[size];
+//       Object[] objects = new Object[10];
+//       gg[] objects1 = (gg[]) objects;
    }
 
     public void put(int dex,T item) {
