@@ -83,4 +83,31 @@ public class StreamTest {
 
 
     }
+
+    @Test
+    public void fg() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4);
+        Collections.rotate(list,-1);
+        list.forEach(System.out::println);
+    }
+
+    public <T>void rotate(List<T>list,int distance) {
+        int size = list.size();
+        if(size==0) return;
+        distance=distance%size;
+        if(distance<0)
+            distance+=size;
+        if(distance==0)return;
+        for(int start=0,nmoved=0;nmoved!=size;start++) {
+           T o = list.get(start);
+            int i=start;
+            do {
+                i += distance;
+                if (i >= size)
+                    i -= size;
+                o = list.set(i, o);
+                nmoved++;
+            } while (i != start);
+        }
+    }
 }

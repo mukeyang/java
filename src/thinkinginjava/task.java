@@ -9,6 +9,11 @@ import java.util.*;
  */
 public class task
 {
+    @Test
+    public void ints() {
+//        new Random().ints(0,10).limit(10).forEach(System.out::println);
+        System.out.println(new Random().nextInt(10));
+    }
 
     public static   void show() {
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -35,13 +40,21 @@ public class task
         lp.entrySet().forEach(System.out::println);
     }
     public static void main(String[] args) {
-//        show();
-        AsociationArray<String, String> pair = new AsociationArray<>(5);
-        pair.put("1", "1");
-        pair.put("2", "2");
-        pair.put("3", "3");
-        System.out.println(pair.get("1"));
-        System.out.println(pair.toString());
+        lru<Integer, Integer> f = new lru<>(3);
+        for (int i = 0; i < 5; i++) {
+            f.put(i,i);
+        }
+        System.out.println(f);
+//        System.out.println(My.a.getClass());
+//        System.out.println(My.a.getDeclaringClass());
+//        System.out.println(My.A.getClass());
+////        show();
+//        AsociationArray<String, String> pair = new AsociationArray<>(5);
+//        pair.put("1", "1");
+//        pair.put("2", "2");
+//        pair.put("3", "3");
+//        System.out.println(pair.get("1"));
+//        System.out.println(pair.toString());
 
     }
 //        Path dir = Paths.get("C:\\Users\\CS\\Desktop\\薛峰-2017M62ZJ02422");
@@ -92,6 +105,11 @@ class lru<K,V> {
         private Entry next;
         public K key;
         public V value;
+
+        @Override
+        public String toString() {
+            return key.toString()+""+value.toString();
+        }
     }
     private final int max;
     private Entry first;
@@ -123,7 +141,7 @@ class lru<K,V> {
         if(entry.next!=null) entry.next.pre=entry.pre;
         if(entry==last) last=last.pre;
         if(first==null||last==null){
-            first=last=null;
+            first=last=entry;
             return;
         }
         entry.next=first;
@@ -153,6 +171,7 @@ class lru<K,V> {
         Entry<K, V> entry = getEntry(key);
         if (entry == null) {
             if(map.size()>max){
+                System.out.println("remove"+last.key);
                 map.remove(last.key);
                 removeLast();
             }
@@ -164,4 +183,28 @@ class lru<K,V> {
         map.put(key, entry);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        Entry it=first;
+        while (it != null) {
+            builder.append(it.toString());
+            it = it.next;
+        }
+        return builder.toString();
+    }
+}
+
+enum My {
+    A {
+        public void ss(){}
+    },a{
+        @Override
+        void ss() {
+
+        }
+
+        public void sd(){}
+    };
+   abstract  void ss();
 }
