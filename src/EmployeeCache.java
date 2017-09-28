@@ -101,6 +101,47 @@ public class EmployeeCache {
     }
 
 }
+
+class cache {
+    private static cache cache;
+    private  Map<String,weak> referent;
+    private ReferenceQueue<Employee> queue;
+    private static Object lock=new Object();
+    private class weak extends WeakReference<Employee> {
+        private  String key;
+
+        public weak(Employee referent, ReferenceQueue<? super Employee> q) {
+            super(referent, q);
+            this.key = referent.getId();
+        }
+    }
+
+    public synchronized Employee getEmployee(String id) {
+        Employee e=null;
+        if (referent.containsKey(id)) {
+            e=referent.get(id).get();
+        }
+        if (e == null) {
+            e = new Employee(id);
+            cacheEmployee(e);
+        }
+        return e;
+    }
+
+    private void cacheEmployee(Employee e) {
+        cleanCache();
+        weak weak = new weak(e,queue);
+        referent.put(e.getId(), weak);
+    }
+
+    private void cleanCache() {
+        weak e=null;
+        while ((e = ((weak) queue.poll())) != null) {
+            referent.remove(e.key);
+            System.out.println("对象ID : " + e.key + "已经被JVM回收");
+        }
+    }
+}
 class Employee {
 
     private String id;
