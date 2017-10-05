@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.EnumMap;
 import java.util.Random;
 
@@ -17,7 +19,10 @@ public enum G {
 
     public int i;
     public  int j=2;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        char[] cbuf = new char[1];
+        new StringReader("几哈看时间").read(cbuf);
+        System.out.println(cbuf[0]);
         try {
             System.out.println(new s().clone().getClass());
         } catch (CloneNotSupportedException e) {
