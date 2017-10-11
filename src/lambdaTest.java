@@ -1,5 +1,7 @@
 
 
+import org.junit.Test;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.time.LocalDate;
@@ -31,10 +33,13 @@ public class lambdaTest {
         System.out.println(s.orElse("no"));
 
     }
-    public static  void timeTest(){
-        System.out.println(LocalDate.now());
-        System.out.println(LocalDate.of(2017, 8, 30).plusDays(1));
-        System.out.println(LocalDate.now().minus(1, ChronoUnit.MONTHS).getDayOfWeek());
+    @Test
+    public  void timeTest(){
+        System.out.println(LocalDateTime.now());
+        LocalDate date = LocalDate.of(2017, 8, 30);
+        LocalDate date1 = date.plusDays(1);
+        System.out.println(ChronoUnit.DAYS.between(date,date1));
+        System.out.println(LocalDate.now().minus(1, ChronoUnit.MONTHS).getDayOfWeek().ordinal()+1);
         System.out.println(LocalDate.now().isLeapYear());
         LocalTime now = LocalTime.now();
         System.out.println(LocalTime.parse("14:23").minus(1, ChronoUnit.HOURS));
@@ -81,7 +86,7 @@ public class lambdaTest {
         list.sort(Comparator.naturalOrder());
         System.out.println(list);
         //streamTest();
-        timeTest();
+//        timeTest();
         amptest();
     }
 
