@@ -11,24 +11,24 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class DeafaltThreadPool<job extends Runnable> implements ThreadPool<job> {
     private static final int MAX=10;
-    private static final int deafute = 5;
+    private static final int defaulte = 5;
     private static final int Min = 1;
     private final LinkedList<job> jobs = new LinkedList<>();
-    private final List<Woker> wokers = Collections.synchronizedList(new ArrayList<Woker>());
-    private int wokerNum = deafute;
+    private final List<Worker> workers = Collections.synchronizedList(new ArrayList<Worker>());
+    private int wokerNum = defaulte;
     private AtomicLong threadNUm = new AtomicLong();
 
     private void initializeWokers(int wokerNum) {
         for (int i = 0; i < wokerNum; i++) {
-            Woker woker = new Woker();
-            wokers.add(woker);
-            Thread thread = new Thread(woker, "ThreadPool-Woker-" + threadNUm.incrementAndGet());
+            Worker worker = new Worker();
+            workers.add(worker);
+            Thread thread = new Thread(worker, "ThreadPool-Worker-" + threadNUm.incrementAndGet());
             thread.start();
         }
     }
 
     public DeafaltThreadPool() {
-        initializeWokers(deafute);
+        initializeWokers(defaulte);
     }
     public DeafaltThreadPool(int num) {
         wokerNum=num>MAX? MAX:num<Min?Min:num;
@@ -47,8 +47,8 @@ public class DeafaltThreadPool<job extends Runnable> implements ThreadPool<job> 
 
     @Override
     public void shutdown() {
-        for (Woker woker : wokers) {
-            woker.shutdown();
+        for (Worker worker : workers) {
+            worker.shutdown();
         }
     }
 
@@ -58,16 +58,16 @@ public class DeafaltThreadPool<job extends Runnable> implements ThreadPool<job> 
     }
 
     @Override
-    public void removeWoker(int num) {
+    public void removeWorker(int num) {
         synchronized (jobs) {
             if (num >= wokerNum) {
                 throw new IllegalArgumentException("beyond ");
             }
             int count=0;
             while (count < num) {
-                Woker woker = wokers.get(num);
-                if (wokers.remove(woker)) {
-                    woker.shutdown();
+                Worker worker = workers.get(num);
+                if (workers.remove(worker)) {
+                    worker.shutdown();
                     count++;
                 }
             }
@@ -77,10 +77,17 @@ public class DeafaltThreadPool<job extends Runnable> implements ThreadPool<job> 
     }
 
     @Override
-    public void addwokers(int num) {
+    public void addworkers(int num) {
+        synchronized (jobs) {
+            if (num + wokerNum > MAX) {
+                num = MAX - wokerNum;
+            }
+            initializeWokers(num);
+            wokerNum+=num;
+        }
 
     }
-    class Woker implements Runnable {
+    class Worker implements Runnable {
         private volatile boolean running = true;
 
         @Override

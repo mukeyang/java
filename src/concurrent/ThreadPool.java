@@ -10,7 +10,7 @@ public interface ThreadPool<job extends Runnable> {
 
     int size();
 
-    void removeWoker(int num);
+    void removeWorker(int num);
 
-    void addwokers(int num);
+    void addworkers(int num);
 }
