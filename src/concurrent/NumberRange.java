@@ -26,4 +26,16 @@ public class NumberRange {
             if(values.compareAndSet(pair,newPair)) return;
         }
     }
+
+    public static void main(String[] args) {
+        a:
+        for (int i = 0; i < 10; i++) {
+            b:
+            for (int i1 = 0; i1 < 20; i1++) {
+                System.out.println(i1);
+                break a;
+            }
+            System.out.println(i);
+        }
+    }
 }
