@@ -1,0 +1,62 @@
+cafe babe //magic number
+0000 //minor version
+0034//major version
+0016// length of constant pool
+0a 0004 0012// method ref tag, constant class info index, name and type index
+09 0003 0013 //same
+07 0014//constant class info tag,index
+07 0015 //same
+01 0001 6d//uft8 tag,length,bytes
+0100 0149 //same
+0100 063c 696e 6974 3e//same
+01 0003 2829 56//same
+01 0004 436f 6465//same
+0100 0f4c 696e 654e
+756d 6265 7254 6162 6c65 //same
+0100 124c 6f63
+616c 5661 7269 6162 6c65 5461 626c 65//same
+01 0004 7468 6973 //same
+0100 0f4c 6a76 6d2f 5465
+7374 436c 6173 733b //same
+0100 0369 6e63 //same
+0100
+0328 2949 //same
+0100 0a53 6f75 7263 6546 696c
+65//same
+01 000e 5465 7374 436c 6173 732e 6a61
+7661 0c00 0700 080c 0005 0006//same
+0100 0d6a
+766d 2f54 6573 7443 6c61 7373 //same
+0100 106a
+6176 612f 6c61 6e67 2f4f 626a 6563 74//same
+00 21//access flags acc_public(0x 0001) acc_super(0x 0020)
+00 03//this class index
+00 04//super class index
+00 00//interface index
+00 01//field count
+00 02//acc_private
+00 05//index of field name
+00 06// descriptor index 
+00 00//attribute count
+00 02//method count
+00 01//access flag public
+00 07//name index
+00 08//descripte index
+00 01//attribute count
+00 09//code
+00 00 00 2f//attribute length
+00 01//max stack
+00 01//max local 
+00 0000 05//code length
+2a //aload_0
+b7//invoke special
+00 01//invoked method ref
+b1//return
+00 00 
+0002 000a 0000 0006 0001 0000 0006 000b
+0000 000c 0001 0000 0005 000c 000d 0000
+0001 000e 000f 0001 0009 0000 0031 0002
+0001 0000 0007 2ab4 0002 0460 ac00 0000
+0200 0a00 0000 0600 0100 0000 0900 0b00
+0000 0c00 0100 0000 0700 0c00 0d00 0000
+0100 1000 0000 0200 11
