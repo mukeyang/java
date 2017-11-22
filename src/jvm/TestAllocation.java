@@ -2,6 +2,10 @@ package jvm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by CS on 2017/10/27.
@@ -31,6 +35,8 @@ public class TestAllocation {
      * -verbose:gc -Xms20M -Xmn10M -Xmx20M -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:+UseSerialGC -XX:MaxTenuringThreshold=1 -XX:+PrintTenuringDistribution
      */
     public static void test3() {
+        Map<Integer, List<Integer>> collect = Stream.of(1, 2, 3, 4).collect(Collectors.groupingBy(Function.identity()));
+//        Arrays.asList(1,2,3,4).sort(Comparator.comparingInt());
         byte[] a1, a2, a3;
         a1 = new byte[_1MB / 4];
         a2 = new byte[4 * _1MB];
@@ -56,8 +62,12 @@ public class TestAllocation {
 
         /*test3();
         TimeUnit.MINUTES.sleep(10);*/
-        fillHeap(1000);
-
+//        fillHeap(1000);
+        {
+            byte[] placeholder = new byte[64 * _1MB];
+        }
+        int a=0;
+        System.gc();
     }
 
 }

@@ -25,8 +25,7 @@ public class test {
         map.put(4, 5);
         map.put(2, 2);
         map.put(0,4);
-map.descendingMap().entrySet().stream().filter(a->true).peek(a-> System.out.println(a+"gg")).forEach(System.out::println);
-
+        map.descendingMap().entrySet().stream().filter(a->true).peek(a-> System.out.println(a+"gg")).forEach(System.out::println);
     }
     @Test
     public void sd() throws Exception {
@@ -78,6 +77,7 @@ public  void line() {
     Path path = Paths.get("C:\\Users\\CS\\Documents\\visual studio 2015\\Projects\\ConsoleApplication5\\ConsoleApplication5\\reviews_Men.txt");
     try (BufferedReader reader = Files.newBufferedReader(path);) {
         Set<String> set = reader.lines().map(a -> a.split(",")[1]).collect(Collectors.toSet());
+
         System.out.println(set.size());
     } catch (IOException e) {
         e.printStackTrace();
