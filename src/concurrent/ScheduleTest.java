@@ -2,11 +2,16 @@ package concurrent;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * Created by CS on 2017/10/23.
@@ -56,6 +61,15 @@ public class ScheduleTest {
     public void ss() {
         List<String> list = Arrays.asList("1", "2", "3");
         System.out.println(String.join(",", list));
+        CompletableFuture<? extends Stream<?>> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                return Files.readAllLines(Paths.get(""));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return Collections.emptyList();
+        }).thenComposeAsync(a -> CompletableFuture.supplyAsync(() -> a.stream().map(Function.identity()))).thenCombineAsync(CompletableFuture.supplyAsync(() -> 100), (a, b) -> a).handleAsync((a, b) -> a);
+
     }
 
     @Test

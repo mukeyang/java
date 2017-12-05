@@ -135,6 +135,14 @@ public ArrayMaker(){}
     }
 
     @Test
+    public void testA() {
+        ArrayList<String>[] a = new ArrayList[3];
+        a[1] = new ArrayList<>();
+        ArrayList<String> s = a[1];
+        s.add("123");
+        System.out.println(s.get(0));
+    }
+    @Test
     public void hg() {
         System.out.println(new ArrayList<Integer>().getClass());
         ArrayList strings = new ArrayList<>();
