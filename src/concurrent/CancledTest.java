@@ -10,7 +10,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class CancledTest {
     static Runnable test= () -> {
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 1000000000; i++) {
+            if(Thread.currentThread().isInterrupted()) {
+                System.out.println("cancled");
+                break;
+            }
             System.out.println("run"+i);
         }
     };
