@@ -3,7 +3,6 @@ package concurrent;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by CS on 2017/12/7.
@@ -22,8 +21,8 @@ public class CancledTest {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService service = Executors.newFixedThreadPool(3);
         Future<?> future = service.submit(test);
-        TimeUnit.SECONDS.sleep(1);
-        future.cancel(true);
+//        TimeUnit.SECONDS.sleep(1);
+//        future.cancel(true);
 
 
     }
