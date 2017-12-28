@@ -14,6 +14,8 @@ import org.junit.Test;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by CS on 2017/12/18.
@@ -67,6 +69,8 @@ public class testChart {
         dataset.setValue(51, "schools1", "5");
         JFreeChart chart = ChartFactory.createLineChart("Loss", "iterator", "rmse", dataset, PlotOrientation.VERTICAL, true, true, false);
         CategoryPlot plot = chart.getCategoryPlot();
+
+
         LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
         LineAndShapeRenderer lineandshaperenderer = (LineAndShapeRenderer) plot
                 .getRenderer();
@@ -82,11 +86,11 @@ public class testChart {
         lineandshaperenderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         lineandshaperenderer.setBaseItemLabelsVisible(true);
         ChartUtilities.saveChartAsJPEG(new File("line42.jpeg"), chart, 640, 480);
-
     }
 
     @Test
     public void testLi() {
-
+        Path log = Paths.get("Log");
+        System.out.println(log.toAbsolutePath());
     }
 }

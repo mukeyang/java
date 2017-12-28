@@ -39,5 +39,8 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="jfreechart-1.0.19" level="project" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="commons-codec-1.10" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
