@@ -1,4 +1,4 @@
-package tomcat;
+package tomcat.chapter2;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -23,6 +23,7 @@ public class PrimitiveServlet implements Servlet {
         System.out.println("from service");
         PrintWriter out = servletResponse.getWriter();
         out.println("hello");
+        out.print("world");
     }
 
     @Override

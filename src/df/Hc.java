@@ -5,6 +5,7 @@ import org.apache.http.client.fluent.Request;
 import org.apache.poi.ss.usermodel.*;
 import org.junit.Test;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +27,19 @@ public class Hc {
 //        0MKKey:123
 //        System.out.println(Request.Get("http://www.baidu.com").execute().returnContent());
 //        testHC();
-        System.out.println(testHC("2016111028", "4034787"));
+//        System.out.println(testHC("2016111028", "4034787"));
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get("C:\\Users\\CS\\Desktop\\res.txt"));
+        BufferedWriter writer=Files.newBufferedWriter(Paths.get("v2.txt"))) {
+            reader.lines().filter(Hc::test).forEach(a -> {
+                try {
+                    writer.write(a + "\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -38,6 +51,16 @@ public class Hc {
                 execute().returnContent().asString();
 //        System.out.println(content);
         if (content.contains("您已经成功登录")) return true;
+        return false;
+    }
+
+    public static boolean test(String line) {
+        String[] split = line.split("\t");
+        try {
+            return testHC(split[0], split[1]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

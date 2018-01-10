@@ -1,5 +1,6 @@
-package tomcat;
+package tomcat.chapter1;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -18,19 +19,19 @@ public class Request {
     }
 
     public void parse() {
-        StringBuffer requset = new StringBuffer(2048);
-        int i;
-        byte[] buffer = new byte[2048];
-        boolean loop = true;
-        StringBuilder sb = new StringBuilder();
-//        while (loop) {
-////            if () {
-//                int i;
-//                while ((i=in.read()) != -1) {
-//                    sb.append((char) i);
-//                }
-//                loop = false;
-//            }
+        try {
+            int i=input.available();
+            System.out.println("available="+i);
+            byte[] buffer = new byte[i];
+            i = input.read(buffer);
+            System.out.println("read="+i);
+            String request = new String(buffer);
+            System.out.println("request="+request);
+            uri = parseUri(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         }
 //    }
 
