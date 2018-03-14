@@ -30,6 +30,8 @@ public class WaitNotify {
                         System.out.println("flag true");
 //                        System.out.println(LocalTime.now());
                         lock.wait();
+//                        SleepUtils.second(6);
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

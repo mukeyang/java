@@ -48,7 +48,10 @@ public class ConditoonUse {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }).start(); new Thread(() -> {
+        }).start();
+        SleepUtils.second(10);
+
+        new Thread(() -> {
 
                 new ConditoonUse().cs();
             System.out.println("cs");

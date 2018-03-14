@@ -1,7 +1,6 @@
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,12 +28,9 @@ public class RegexTest {
     public void h() {
         String g="";
         File file = new File(".");
-        file.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                Pattern df = Pattern.compile(g);
-                return false;
-            }
+        file.list((dir, name) -> {
+            Pattern df = Pattern.compile(g);
+            return false;
         });
 
         String[] list = file.list((dir, name) -> Pattern.matches("[0-9]\\.txt",name));
