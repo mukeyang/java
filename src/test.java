@@ -73,9 +73,17 @@ public class test {
         women.close();
     }
 @Test
+public void pathTest() {
+    Path path = Paths.get("c:/hello/hello");
+    System.out.println(path.resolve("hello"));
+    System.out.println((Paths.get("c:/hello").relativize(path)));
+
+}
+
+    @Test
 public  void line() {
     Path path = Paths.get("C:\\Users\\CS\\Documents\\visual studio 2015\\Projects\\ConsoleApplication5\\ConsoleApplication5\\reviews_Men.txt");
-    try (BufferedReader reader = Files.newBufferedReader(path);) {
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
         Set<String> set = reader.lines().map(a -> a.split(",")[1]).collect(Collectors.toSet());
 
         System.out.println(set.size());

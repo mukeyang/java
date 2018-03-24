@@ -12,4 +12,12 @@ public class ThreadLocalTest {
             System.out.println(toString() + "gc");
         }
     };
+
+    public static void main(String[] args) {
+        String s = "hello world";
+        for (int i = 0; i < 10000; i++) {
+            s += i;
+        }
+        System.out.println(s);
+    }
 }
