@@ -1,6 +1,3 @@
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-
 /**
  * Created by CS on 2018/3/24.
  */
@@ -8,10 +5,12 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 public class test {
     public static void main(String[] args) {
 
-        ApplicationContext context = new FileSystemXmlApplicationContext("springTest\\config\\config.xml");
-        HelloApi hello = context.getBean("hello", HelloApi.class);
-        HelloApi hello2 = context.getBean("h2", HelloApi.class);
-        hello.sayHello();
-        hello2.sayHello();
+//        ApplicationContext context = new FileSystemXmlApplicationContext("springTest\\config\\config.xml");
+//        HelloApi hello = context.getBean("hello", HelloApi.class);
+//        HelloApi hello2 = context.getBean("gg", HelloApi.class);
+//        hello.sayHello();
+//        hello2.sayHello();
+//        System.out.println(Arrays.toString(context.getAliases("hello")));
+//        context.getBean("byindex",HelloApi.class).sayHello();
     }
 }

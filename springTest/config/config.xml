@@ -3,5 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <import resource="1.xml"/>
-    <bean id="hello" class="HeoolImpl"/>
+    <bean id="hello" name="hello1" class="HeoolImpl">
+        <constructor-arg index="0" value="jj"/>
+    </bean>
+    <bean id="bean3" class="HelloApiFactory"/>
+    <bean id="bean4" factory-bean="bean3" factory-method="newInstance"/>
+    <bean id="byindex" class="helloImpl3">
+        <constructor-arg index="0" value="ss"/>
+        <constructor-arg index="1" value="2"/>
+        <property name="index" value="1"/>
+        <property name="msg" value="uu"/>
+    </bean>
 </beans>
