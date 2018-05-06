@@ -11,7 +11,8 @@ public class Request {
     private InputStream in;
 
     public String getUri() {
-        return uri;
+        String s = uri.substring(1);
+        return s;
     }
 
     public void setUri(String uri) {
@@ -26,9 +27,11 @@ public class Request {
 
     public void parse() {
         Scanner scanner = new Scanner(in);
-        String line = scanner.nextLine();
+        if (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
         System.out.println("request=" + line);
-        uri = parseUri(line);
+            uri = parseUri(line);
+        }
     }
 
     public String parseUri(String line) {

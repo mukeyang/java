@@ -22,8 +22,12 @@ public class HttpServer {
                 try (Socket socket = serverSocket.accept()) {
                     InputStream in = socket.getInputStream();
                     OutputStream out = socket.getOutputStream();
-                    Request requset = new Request(in);
-
+                    Request request = new Request(in);
+                    request.parse();
+                    Response response = new Response(out);
+                    response.setRequest(request);
+                    response.sendStaticResource();
+                    shutdown = request.getUri().equals(SHUTDOWN);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -35,6 +39,7 @@ public class HttpServer {
 
     public static void main(String[] args) {
         HttpServer server = new HttpServer();
+        server.await();
 
     }
 }
