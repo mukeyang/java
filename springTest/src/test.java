@@ -4,6 +4,8 @@
 
 public class test {
     public static void main(String[] args) {
+        System.out.println(
+        );
 
 //        ApplicationContext context = new FileSystemXmlApplicationContext("springTest\\config\\config.xml");
 //        HelloApi hello = context.getBean("hello", HelloApi.class);

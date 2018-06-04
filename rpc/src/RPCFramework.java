@@ -21,7 +21,8 @@ public class RPCFramework {
             try (Socket socket = serverSocket.accept()) {
                 Thread thread = new Thread(() -> {
                     ObjectOutputStream outputStream1 = null;
-                    try (ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream()); ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())
+                    try (ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+                         ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())
                     ) {
                         outputStream1 = outputStream;
                         String name = inputStream.readUTF();
@@ -33,11 +34,11 @@ public class RPCFramework {
                         outputStream.writeObject(result);
 
                     } catch (Throwable e) {
-//                        try {
-//                            outputStream1.writeObject(e);
-//                        } catch (IOException e1) {
-//                            e1.printStackTrace();
-//                        }
+                        try {
+                            outputStream1.writeObject(e);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                         e.printStackTrace();
                     }
                 });
@@ -57,11 +58,15 @@ public class RPCFramework {
         }
         return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class<?>[]{interfaceClass}, new InvocationHandler() {
             @Override
+            public String toString() {
+                return getClass().getName();
+            }
+
+            @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 try (Socket socket = new Socket(host, port);
                      ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-                     ObjectInputStream in = new ObjectInputStream(socket.getInputStream())
-                ) {
+                     ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
                     out.writeUTF(method.getName());
                     out.writeObject(method.getParameterTypes());
                     out.writeObject(args);

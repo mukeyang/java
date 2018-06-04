@@ -1,20 +1,20 @@
 /**
  * Created by CS on 2018/5/6.
  */
-public interface Hello {
-    String hello(String name);
+public interface Hello<T> {
+    String hello(T name);
 }
 
-class imp implements Hello {
+class Helloimp<T> implements Hello<T> {
     @Override
-    public String hello(String name) {
+    public String hello(T name) {
         return "hello" + name;
     }
 }
 
 class RpcProvider {
     public static void main(String[] args) {
-        Hello imp = new imp();
+        Hello imp = new Helloimp();
         RPCFramework.export(imp, 1234);
     }
 }
@@ -22,7 +22,7 @@ class RpcProvider {
 class RpcConsum {
     public static void main(String[] args) throws Exception {
         Hello refer = RPCFramework.refer(Hello.class, "127.0.0.1", 1234);
-        String rpc = refer.hello("rpc");
-        System.out.println(rpc);
+        String rpc = refer.hello(123);
+        System.out.println(refer);
     }
 }
