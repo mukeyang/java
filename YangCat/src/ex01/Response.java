@@ -24,7 +24,10 @@ public class Response {
     public void sendStaticResource() throws IOException {
         Path path = Paths.get(HttpServer.WEB_ROOT).resolve(request.getUri());
         System.out.println(path.toAbsolutePath());
-        if (!Files.exists(path)) outputStream.write("404".getBytes());
+        if (!Files.exists(path)) {
+            outputStream.write("404".getBytes());
+            return;
+        }
         byte[] bytes = Files.readAllBytes(path);
 
         outputStream.write(bytes);

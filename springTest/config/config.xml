@@ -2,8 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <import resource="1.xml"/>
-    <bean id="hello" name="hello1" class="HeoolImpl">
+    <!--<import resource="1.xml"/>-->
+    <bean id="hello" name="hello1" class="HeoolImpl" scope="prototype">
         <constructor-arg index="0" value="jj"/>
     </bean>
     <bean id="bean3" class="HelloApiFactory"/>
@@ -12,6 +12,29 @@
         <constructor-arg index="0" value="ss"/>
         <constructor-arg index="1" value="2"/>
         <property name="index" value="1"/>
-        <property name="msg" value="uu"/>
+        <property name="msg" value="${chen}"/>
+        <property name="h" ref="hello"/>
+        <property name="date" value="2018-06-14"/>
+        <lookup-method name="getH" bean="hello"/>
+    </bean>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" lazy-init="false">
+        <property name="location" value="classpath:1.properties"/>
+    </bean>
+    <bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+        <property name="location" value="classpath:2.properties"/>
+    </bean>
+    <bean class="TestProcessor"/>
+    <bean id="dateEditor" class="DataPropertyEditor">
+        <property name="dataPattern" value="yyyy-MM-dd"/>
+    </bean>
+    <bean id="dateRegister" class="DateRegister">
+        <property name="editor" ref="dateEditor"/>
+    </bean>
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars">
+            <list>
+                <ref bean="dateRegister"/>
+            </list>
+        </property>
     </bean>
 </beans>

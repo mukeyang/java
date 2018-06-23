@@ -49,7 +49,7 @@ cafe babe //magic number
 00 01//max local 
 00 0000 05//code length
 2a //aload_0
-b7//invoke special
+b7//invoke secial
 00 01//invoked method ref
 b1//return
 00 00 

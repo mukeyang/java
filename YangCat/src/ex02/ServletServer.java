@@ -1,5 +1,6 @@
 package ex02;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,6 +12,8 @@ import java.net.Socket;
  */
 public class ServletServer {
     public static final String SHUTDOWN = "/SHUTDOWN";
+    public static final String WEB_ROOT = System.getProperty("user.dir") + File.separator + "webroot";
+
     private boolean shutdown = false;
 
     public void await() {
